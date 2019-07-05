@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'multiple_select_item.dart';
+import 'package:multiple_select/src/multiple_select_item.dart';
 
 class SelectorList<T> extends StatefulWidget {
   final List<MultipleSelectItem> dataList;

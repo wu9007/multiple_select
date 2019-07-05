@@ -1,7 +1,9 @@
+library multiple_select;
+
 import 'package:flutter/material.dart';
 
-import 'multiple_select_route.dart';
-import 'multiple_select_item.dart';
+import 'package:multiple_select/src/multiple_select_route.dart';
+import 'package:multiple_select/src/multiple_select_item.dart';
 
 class MultipleSelect {
   ///

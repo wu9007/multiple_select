@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_select/multiple_select_route.dart';
+import 'package:multiple_select/src/multiple_select_route.dart';
 
 
 class MultipleSelectBak extends StatefulWidget {

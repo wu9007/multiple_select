@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multiple_select/multiple_select.dart';
-import 'package:multiple_select/multiple_select_item.dart';
+import 'package:multiple_select/src/multiple_select_item.dart';
 
 void main() => runApp(MyApp());
 

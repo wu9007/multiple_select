@@ -7,4 +7,4 @@ version:
   revision: 52e8efef6a503a02379079619d83aa820a2c4115
   channel: master
 
-project_type: plugin
+project_type: package
