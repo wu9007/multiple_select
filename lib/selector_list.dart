@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'multiple_select_tem.dart';
+import 'multiple_select_item.dart';
 
 class SelectorList<T> extends StatefulWidget {
   final List<MultipleSelectItem> dataList;
@@ -28,29 +28,33 @@ class SelectorListState extends State<SelectorList> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              MaterialButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  '取消',
-                  style: TextStyle(color: Colors.black54, fontSize: 18),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                MaterialButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    '取消',
+                    style: TextStyle(color: Colors.black54, fontSize: 18),
+                  ),
                 ),
-              ),
-              MaterialButton(
-                onPressed: () {
-                  Navigator.pop(context, this._dataList.where((item) => item.selected).toList());
-                },
-                child: Text(
-                  '确定',
-                  style: TextStyle(color: Colors.blue, fontSize: 18),
+                MaterialButton(
+                  onPressed: () {
+                    Navigator.pop(context, this._dataList.where((item) => item.selected).toList());
+                  },
+                  child: Text(
+                    '确定',
+                    style: TextStyle(color: Colors.blue, fontSize: 18),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
+            height: 50,
           ),
+          Divider(),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (BuildContext context, int index) => Divider(height: 1.0, color: Colors.black54),

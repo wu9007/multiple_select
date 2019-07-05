@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'multiple_select_tem.dart';
-import 'multiple_select.dart';
+import 'package:multiple_select/multiple_select.dart';
+import 'package:multiple_select/multiple_select_item.dart';
 
 void main() => runApp(MyApp());
 

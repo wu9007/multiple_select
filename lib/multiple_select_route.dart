@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'multiple_select_tem.dart';
+import 'multiple_select_item.dart';
 import 'selector_list.dart';
 
 class MultipleSelectRoute<T> extends PopupRoute<T> {
