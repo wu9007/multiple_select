@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'multiple_select_body.dart';
 import 'multiple_select_route.dart';
 
 class MultipleSelect extends StatefulWidget {
@@ -53,7 +52,7 @@ class _MultipleSelectState extends State<MultipleSelect> with SingleTickerProvid
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MultipleSelectRoute(theme: Theme.of(context, shadowThemeOnly: true), barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel),
+                      MultipleSelectRoute(barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel),
                     );
                   },
                   color: Colors.deepOrange,
@@ -62,7 +61,7 @@ class _MultipleSelectState extends State<MultipleSelect> with SingleTickerProvid
               ],
             ),
             Positioned(
-              child: multipleSelectBody,
+              child: Text('hello'),
               bottom: 0,
               top: MediaQuery.of(context).size.height - this._animation.value,
               width: MediaQuery.of(context).size.width,

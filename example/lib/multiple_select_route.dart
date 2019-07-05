@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'multiple_select_body.dart';
+import 'multiple_select_tem.dart';
+import 'selector_list.dart';
 
 class MultipleSelectRoute<T> extends PopupRoute<T> {
-  final ThemeData theme;
   final String barrierLabel;
+  final List<MultipleSelectItem> dataList;
 
   MultipleSelectRoute({
-    this.theme,
     this.barrierLabel,
+    this.dataList,
   });
 
   @override
@@ -34,8 +35,9 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
     Widget bottomSheet = new MediaQuery.removePadding(
       removeTop: true,
       context: context,
-      child: multipleSelectBody,
+      child: SelectorList(dataList: this.dataList),
     );
+    ThemeData theme = Theme.of(context, shadowThemeOnly: true);
     if (theme != null) {
       bottomSheet = new Theme(data: theme, child: bottomSheet);
     }
