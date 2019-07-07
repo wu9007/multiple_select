@@ -4,45 +4,47 @@ import 'package:multiple_select/multiple_select.dart';
 
 typedef OnConfirm(List<MultipleSelectItem> elements);
 
-class MultipleDropSelector extends StatefulWidget {
+class MultipleDropDown extends StatefulWidget {
   final List<MultipleSelectItem> elements;
   final OnConfirm onConfirm;
   final String placeholder;
-  final double width;
 
-  MultipleDropSelector({@required this.elements, @required this.onConfirm, this.placeholder, this.width});
+  MultipleDropDown({@required this.elements, @required this.onConfirm, this.placeholder});
 
   @override
-  State<StatefulWidget> createState() => MultipleDropSelectorState();
+  State<StatefulWidget> createState() => MultipleDropDownState();
 }
 
-class MultipleDropSelectorState extends State<MultipleDropSelector> {
+class MultipleDropDownState extends State<MultipleDropDown> {
   List<MultipleSelectItem> _selectedElements = [];
   double _width;
 
   @override
   void initState() {
     super.initState();
-    if (widget.width == null) {
-      this._width = MediaQuery.of(context).size.width;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        child: this._getContent(),
-        height: 50,
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-          color: Colors.grey,
-          style: BorderStyle.solid,
-          width: 1,
-        ))),
-        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-        width: this._width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: this._getContent(),
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                color: Colors.grey,
+                style: BorderStyle.solid,
+                width: 1,
+              ))),
+              padding: EdgeInsets.symmetric(horizontal: 2),
+              width: this._width,
+            ),
+          )
+        ],
       ),
       onTap: () {
         MultipleSelect.showMultipleSelector(
@@ -60,15 +62,24 @@ class MultipleDropSelectorState extends State<MultipleDropSelector> {
 
   Widget _getContent() {
     if (this._selectedElements.length <= 0 && this.widget.placeholder != null) {
-      return Text(this.widget.placeholder);
+      return Padding(
+        child: Text(
+          this.widget.placeholder,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black,
+            decoration: TextDecoration.none,
+          ),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 13, horizontal: 5),
+      );
     } else {
-      return ListView(
-        scrollDirection: Axis.horizontal,
+      return Wrap(
         children: this
             ._selectedElements
             .map(
               (element) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2),
+                padding: EdgeInsets.symmetric(horizontal: 1),
                 child: RawChip(
                   avatar: CircleAvatar(
                     backgroundColor: Colors.redAccent.shade400,
