@@ -67,7 +67,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
           this.widget.placeholder,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black,
+            color: Colors.grey.shade500,
             decoration: TextDecoration.none,
           ),
         ),

@@ -56,7 +56,6 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
   }
 }
 
-
 class SelectorList<T> extends StatefulWidget {
   final List<MultipleSelectItem> dataList;
   final double height;
@@ -125,8 +124,9 @@ class SelectorListState extends State<SelectorList> {
                         child: Text(
                           item.content.toString(),
                           style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
+                            fontSize: 17,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.normal,
                             decoration: TextDecoration.none,
                           ),
                         ),
@@ -136,14 +136,14 @@ class SelectorListState extends State<SelectorList> {
                         child: GestureDetector(
                           child: item.selected
                               ? Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                            size: 30,
-                          )
+                                  Icons.check_circle,
+                                  color: Colors.green,
+                                  size: 30,
+                                )
                               : Icon(
-                            Icons.check_circle_outline,
-                            size: 30,
-                          ),
+                                  Icons.check_circle_outline,
+                                  size: 30,
+                                ),
                           onTap: () {
                             this.setState(() => item.selected = !item.selected);
                           },
