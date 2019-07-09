@@ -11,7 +11,7 @@ A versatile and beautiful multi-drop-down component for App developers.🚀
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.7
+ multiple_select: ^0.1.8
 ```
 
 ## Usage example

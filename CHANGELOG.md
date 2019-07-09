@@ -22,10 +22,6 @@
 
 * Support Disable.
 
-## [0.1.6] - 2019/07/09.
+## [0.1.8] - 2019/07/09.
 
-* values was require.
-
-## [0.1.7] - 2019/07/09.
-
-* disabled.
+* deserialization.
