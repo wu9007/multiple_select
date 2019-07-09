@@ -17,3 +17,7 @@
 ## [0.1.4] - 2019/07/09.
 
 * Support Default Values.
+
+## [0.1.5] - 2019/07/09.
+
+* Support Disable.

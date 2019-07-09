@@ -11,7 +11,7 @@ A versatile and beautiful multi-drop-down component for App developers.🚀
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.4
+ multiple_select: ^0.1.5
 ```
 
 ## Usage example
@@ -28,13 +28,16 @@ MultipleSelect.showMultipleSelector(
 
 #### MultipleDropDown
 ```dart
-List<MultipleSelectItem> _elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示', content: '第$index项下拉'));
+List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
+
+List _selectedValues = elements.where((element) => element.value % 2 == 0).map((item) => item.value).toList();
 MultipleDropDown(
           placeholder: '请选择',
-          values: _elements.where((element) => element.value % 2 == 0).toList(),
-          elements: _elements,
-          onConfirm: (elements) {
-            elements.forEach((element) => print(element.display));
+          disable: false,
+          values: _selectedValues,
+          elements: elements,
+          onConfirm: (selectedValues) {
+            this.setState(() => this._selectedValues = selectedValues);
           },
         )
 ```
