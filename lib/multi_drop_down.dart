@@ -4,20 +4,23 @@ import 'package:multiple_select/multiple_select.dart';
 
 typedef OnConfirm(List selectedValues);
 
+/// 下拉多选
+/// Created by Shusheng.
 class MultipleDropDown extends StatefulWidget {
   final List values;
   final List<MultipleSelectItem> elements;
   final OnConfirm onConfirm;
   final String placeholder;
-  final bool disable;
+  final bool disabled;
 
   MultipleDropDown({
+    Key key,
     @required this.values,
     @required this.elements,
     @required this.onConfirm,
     this.placeholder,
-    this.disable = false,
-  });
+    this.disabled = false,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MultipleDropDownState();
@@ -47,7 +50,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
                     child: this._getContent(),
                   ),
                   Opacity(
-                    opacity: this.widget.disable ? 0.5 : 1,
+                    opacity: this.widget.disabled ? 0.5 : 1,
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
                       child: Icon(Icons.list, color: Colors.black54),
@@ -63,7 +66,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
         ],
       ),
       onTap: () {
-        if (!this.widget.disable)
+        if (!this.widget.disabled)
           MultipleSelect.showMultipleSelector(
             context,
             elements: this.widget.elements,
@@ -104,10 +107,10 @@ class MultipleDropDownState extends State<MultipleDropDown> {
                     backgroundColor: Colors.redAccent.shade400,
                     child: Text(element.display.toString().substring(0, 1)),
                   ),
-                  isEnabled: !this.widget.disable,
+                  isEnabled: !this.widget.disabled,
                   label: Text(element.display),
                   onDeleted: () {
-                    if (!this.widget.disable) {
+                    if (!this.widget.disabled) {
                       MultipleSelectItem clickElement = this.widget.elements.singleWhere((item) => item.value == element.value);
                       clickElement.selected = false;
                       this.setState(() => this._selectedElements.remove(element));

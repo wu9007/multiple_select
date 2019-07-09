@@ -28,7 +28,7 @@ class MyAppState extends State<MyApp> {
         ),
         body: MultipleDropDown(
           placeholder: '请选择',
-          disable: false,
+          disabled: false,
           values: _selectedValues,
           elements: elements,
           onConfirm: (selectedValues) {

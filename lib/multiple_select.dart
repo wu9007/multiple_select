@@ -2,6 +2,8 @@ library multiple_select;
 
 import 'package:flutter/material.dart';
 
+/// 底部弹出多项选择器
+/// Created by Shusheng.
 class MultipleSelect {
   ///
   /// Display multiple selector bottom sheet.
