@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
 
 class MyAppState extends State<MyApp> {
-  List _selectedValues = elements.where((element) => element.value % 2 == 0).map((item) => item.value).toList();
+  List _selectedValues = [];
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyAppState extends State<MyApp> {
         ),
         body: MultipleDropDown(
           placeholder: '请选择',
-          disable: true,
+          disable: false,
           values: _selectedValues,
           elements: elements,
           onConfirm: (selectedValues) {

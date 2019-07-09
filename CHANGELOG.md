@@ -21,3 +21,7 @@
 ## [0.1.5] - 2019/07/09.
 
 * Support Disable.
+
+## [0.1.5] - 2019/07/10.
+
+* values was require.
