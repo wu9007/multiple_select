@@ -51,6 +51,8 @@ import 'package:multiple_select/multi_drop_down.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  List<MultipleSelectItem> _elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示内容', content: '第$index项下拉内容'));
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,7 +66,8 @@ class MyApp extends StatelessWidget {
         ),
         body: MultipleDropDown(
           placeholder: '请选择',
-          elements: List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示内容', content: '第$index项下拉内容')),
+          values: _elements.where((element) => element.value % 2 == 0).toList(),
+          elements: _elements,
           onConfirm: (elements) {
             elements.forEach((element) => print(element.display));
           },
