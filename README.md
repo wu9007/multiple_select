@@ -28,9 +28,11 @@ MultipleSelect.showMultipleSelector(
 
 #### MultipleDropDown
 ```dart
+List<MultipleSelectItem> _elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示', content: '第$index项下拉'));
 MultipleDropDown(
           placeholder: '请选择',
-          elements: List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示内容', content: '第$index项下拉内容')),
+          values: _elements.where((element) => element.value % 2 == 0).toList(),
+          elements: _elements,
           onConfirm: (elements) {
             elements.forEach((element) => print(element.display));
           },
