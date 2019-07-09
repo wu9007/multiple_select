@@ -8,8 +8,9 @@ class MultipleDropDown extends StatefulWidget {
   final List<MultipleSelectItem> elements;
   final OnConfirm onConfirm;
   final String placeholder;
+  final List<MultipleSelectItem> values;
 
-  MultipleDropDown({@required this.elements, @required this.onConfirm, this.placeholder});
+  MultipleDropDown({this.values, @required this.elements, @required this.onConfirm, this.placeholder});
 
   @override
   State<StatefulWidget> createState() => MultipleDropDownState();
@@ -22,38 +23,44 @@ class MultipleDropDownState extends State<MultipleDropDown> {
   @override
   void initState() {
     super.initState();
+    this._initElement();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Expanded(
             child: Container(
-              child: this._getContent(),
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(
-                color: Colors.grey,
-                style: BorderStyle.solid,
-                width: 1,
-              ))),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: this._getContent(),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
+                    child: Icon(Icons.list, color: Colors.black54),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
               padding: EdgeInsets.symmetric(horizontal: 2),
               width: this._width,
             ),
-          )
+          ),
         ],
       ),
       onTap: () {
         MultipleSelect.showMultipleSelector(
           context,
-          dataList: this.widget.elements,
+          elements: this.widget.elements,
         ).then((selectedList) {
           if (selectedList != null) {
             this.setState(() => this._selectedElements = selectedList);
             this.widget.onConfirm(this._selectedElements);
+          } else {
+            this._initElement();
           }
         });
       },
@@ -87,8 +94,9 @@ class MultipleDropDownState extends State<MultipleDropDown> {
                   ),
                   label: Text(element.display),
                   onDeleted: () {
-                    this.widget.elements[this.widget.elements.indexOf(element)].selected = false;
-                    this.setState(() => this._selectedElements.removeAt(this._selectedElements.indexOf(element)));
+                    MultipleSelectItem clickElement = this.widget.elements.singleWhere((item) => item.value == element.value);
+                    clickElement.selected = false;
+                    this.setState(() => this._selectedElements.remove(element));
                     this.widget.onConfirm(this._selectedElements);
                   },
                 ),
@@ -96,6 +104,20 @@ class MultipleDropDownState extends State<MultipleDropDown> {
             )
             .toList(),
       );
+    }
+  }
+
+  _initElement() {
+    if (this.widget.values != null && this.widget.values.length > 0) {
+      this._selectedElements = this.widget.values;
+      for (MultipleSelectItem item in this.widget.elements) {
+        item.selected = false;
+        for (MultipleSelectItem selectedItem in this._selectedElements) {
+          if (item.value == selectedItem.value && !item.selected) {
+            item.selected = true;
+          }
+        }
+      }
     }
   }
 }

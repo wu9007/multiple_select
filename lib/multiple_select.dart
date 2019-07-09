@@ -6,21 +6,21 @@ class MultipleSelect {
   ///
   /// Display multiple selector bottom sheet.
   ///
-  static Future showMultipleSelector(BuildContext context, {@required List<MultipleSelectItem> dataList}) {
+  static Future showMultipleSelector(BuildContext context, {@required List<MultipleSelectItem> elements}) {
     return Navigator.push(
       context,
-      MultipleSelectRoute<List<MultipleSelectItem>>(barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel, dataList: dataList),
+      MultipleSelectRoute<List<MultipleSelectItem>>(barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel, elements: elements),
     );
   }
 }
 
 class MultipleSelectRoute<T> extends PopupRoute<T> {
   final String barrierLabel;
-  final List<MultipleSelectItem> dataList;
+  final List<MultipleSelectItem> elements;
 
   MultipleSelectRoute({
     this.barrierLabel,
-    this.dataList,
+    this.elements,
   });
 
   @override
@@ -46,7 +46,7 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
     Widget bottomSheet = new MediaQuery.removePadding(
       removeTop: true,
       context: context,
-      child: SelectorList(dataList: this.dataList),
+      child: SelectorList(elements: this.elements),
     );
     ThemeData theme = Theme.of(context, shadowThemeOnly: true);
     if (theme != null) {
@@ -57,22 +57,22 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
 }
 
 class SelectorList<T> extends StatefulWidget {
-  final List<MultipleSelectItem> dataList;
+  final List<MultipleSelectItem> elements;
   final double height;
 
-  SelectorList({@required this.dataList, this.height = 150});
+  SelectorList({@required this.elements, this.height = 150});
 
   @override
   State<StatefulWidget> createState() => SelectorListState();
 }
 
 class SelectorListState extends State<SelectorList> {
-  List<MultipleSelectItem> _dataList;
+  List<MultipleSelectItem> _elements;
 
   @override
   initState() {
     super.initState();
-    this._dataList = widget.dataList;
+    this._elements = widget.elements;
   }
 
   @override
@@ -96,7 +96,7 @@ class SelectorListState extends State<SelectorList> {
                 ),
                 MaterialButton(
                   onPressed: () {
-                    Navigator.pop(context, this._dataList.where((item) => item.selected).toList());
+                    Navigator.pop(context, this._elements.where((item) => item.selected).toList());
                   },
                   child: Text(
                     '确定',
@@ -111,9 +111,9 @@ class SelectorListState extends State<SelectorList> {
           Expanded(
             child: ListView.separated(
               separatorBuilder: (BuildContext context, int index) => Divider(height: 1.0, color: Colors.black54),
-              itemCount: this._dataList.length,
+              itemCount: this._elements.length,
               itemBuilder: (context, index) {
-                MultipleSelectItem item = this._dataList[index];
+                MultipleSelectItem item = this._elements[index];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Row(
