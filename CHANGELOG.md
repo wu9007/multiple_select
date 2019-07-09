@@ -25,3 +25,7 @@
 ## [0.1.8] - 2019/07/09.
 
 * deserialization.
+
+## [0.1.9] - 2019/07/09.
+
+* deserialization.

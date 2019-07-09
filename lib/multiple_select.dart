@@ -188,31 +188,15 @@ class MultipleSelectItem<V, D, C> {
     this.selected = false,
   });
 
-  MultipleSelectItem.fromJson(
-    Map<String, dynamic> json, {
-    displayKey = 'display',
-    valueKey = 'value',
-    contentKey = 'content',
-    selected = false,
-  })  : value = json[valueKey] ?? '',
+  MultipleSelectItem.fromJson(Map<String, dynamic> json, {displayKey = 'display', valueKey = 'value', contentKey = 'content', selectedKey = 'selected'})
+      : value = json[valueKey] ?? '',
         display = json[displayKey] ?? '',
-        content = json[contentKey] ?? '';
+        content = json[contentKey] ?? '',
+        selected = json[selectedKey] ?? false;
 
-  static List<MultipleSelectItem> allFromJson(
-    List jsonList, {
-    valueKey,
-    displayKey,
-    contentKey,
-    selected = false,
-  }) {
+  static List<MultipleSelectItem> allFromJson(List jsonList, {displayKey = 'display', valueKey = 'value', contentKey = 'content', selectedKey = 'selected'}) {
     return jsonList
-        .map((json) => MultipleSelectItem.fromJson(
-              json,
-              displayKey: displayKey,
-              valueKey: valueKey,
-              contentKey: contentKey,
-              selected: selected,
-            ))
+        .map((json) => MultipleSelectItem.fromJson(json, displayKey: displayKey, valueKey: valueKey, contentKey: contentKey, selectedKey: selectedKey))
         .toList();
   }
 }
