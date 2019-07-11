@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
 
 class MyAppState extends State<MyApp> {
-  List _selectedValues = [];
+  List _values = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,8 @@ class MyAppState extends State<MyApp> {
         body: MultipleDropDown(
           placeholder: '请选择',
           disabled: false,
-          values: _selectedValues,
+          values: _values,
           elements: elements,
-          onConfirm: (selectedValues) {
-            this.setState(() => this._selectedValues = selectedValues);
-          },
         ),
       ),
     );

@@ -5,13 +5,12 @@
 
 A versatile and beautiful multi-drop-down component for App developers.🚀
 
-![multiple_select.gif](https://upload-images.jianshu.io/upload_images/3646846-f8f6e3af37f70ac3.gif?imageMogr2/auto-orient/strip)
-
+![select.gif](https://upload-images.jianshu.io/upload_images/3646846-0e6b2d46617cf0c9.gif?imageMogr2/auto-orient/strip)
 ## Getting Started
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.10
+ multiple_select: ^0.1.11
 ```
 
 ## Usage example
@@ -36,9 +35,6 @@ MultipleDropDown(
           disabled: false,
           values: _selectedValues,
           elements: elements,
-          onConfirm: (selectedValues) {
-            this.setState(() => this._selectedValues = selectedValues);
-          },
         )
 ```
 
