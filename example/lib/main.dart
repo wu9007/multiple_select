@@ -10,11 +10,18 @@ class MyApp extends StatefulWidget {
   State<StatefulWidget> createState() => MyAppState();
 }
 
-List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
+List<MultipleSelectItem> elements = List.generate(
+  15,
+  (index) => MultipleSelectItem.build(
+    value: index,
+    display: '$index display',
+    content: '$index content',
+  ),
+);
+
+List _selectedValues = elements.where((element) => element.value % 2 == 0).map((item) => item.value).toList();
 
 class MyAppState extends State<MyApp> {
-  List _values = [];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,9 +34,9 @@ class MyAppState extends State<MyApp> {
           title: Text('Multiple Select Demo Page'),
         ),
         body: MultipleDropDown(
-          placeholder: '请选择',
+          placeholder: '请选择单据',
           disabled: false,
-          values: _values,
+          values: _selectedValues,
           elements: elements,
         ),
       ),

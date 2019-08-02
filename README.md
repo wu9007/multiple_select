@@ -5,20 +5,29 @@
 
 A versatile and beautiful multi-drop-down component for App developers.🚀
 
-![select.gif](https://upload-images.jianshu.io/upload_images/3646846-0e6b2d46617cf0c9.gif?imageMogr2/auto-orient/strip)
+![select.gif](./example/android/app/src/main/res/drawable/selector.gif)
 ## Getting Started
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.11
+ multiple_select: ^0.1.2
 ```
 
 ## Usage example
 
 ```dart
-List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
+/// Simulate 15 data
+List<MultipleSelectItem> elements = List.generate(
+  15,
+  (index) => MultipleSelectItem.build(
+    value: index,
+    display: '$index display',
+    content: '$index content',
+  ),
+);
 
-List _selectedValues = elements.where((element) => element.value % 2 == 0).map((item) => item.value).toList();
+List _selectedValues = [];
+
 MultipleDropDown(
           placeholder: '请选择',
           disabled: false,

@@ -59,6 +59,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
             context,
             elements: this.widget.elements,
             values: this.widget.values,
+            title: this.widget.placeholder,
           ).then((values) {
             this.setState(() {});
           });
@@ -89,10 +90,6 @@ class MultipleDropDownState extends State<MultipleDropDown> {
               (element) => Padding(
                 padding: EdgeInsets.symmetric(horizontal: 1),
                 child: RawChip(
-                  avatar: CircleAvatar(
-                    backgroundColor: Colors.redAccent.shade400,
-                    child: Text(element.display.toString().substring(0, 1)),
-                  ),
                   isEnabled: !this.widget.disabled,
                   label: Text(element.display),
                   onDeleted: () {

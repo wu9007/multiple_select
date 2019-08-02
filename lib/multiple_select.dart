@@ -10,6 +10,7 @@ class MultipleSelect {
     BuildContext context, {
     @required List<MultipleSelectItem> elements,
     @required values,
+    @required String title,
   }) {
     return Navigator.push(
       context,
@@ -17,6 +18,7 @@ class MultipleSelect {
         barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         elements: elements,
         values: values,
+        title: title,
       ),
     );
   }
@@ -26,11 +28,13 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
   final String barrierLabel;
   final List<MultipleSelectItem> elements;
   final List values;
+  final String title;
 
   MultipleSelectRoute({
     this.barrierLabel,
     @required this.elements,
     @required this.values,
+    @required this.title,
   });
 
   @override
@@ -59,6 +63,7 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
       child: SelectorList(
         elements: this.elements,
         values: this.values,
+        title: this.title,
       ),
     );
     ThemeData theme = Theme.of(context, shadowThemeOnly: true);
@@ -73,8 +78,14 @@ class SelectorList<T> extends StatefulWidget {
   final List<MultipleSelectItem> elements;
   final double height;
   final List values;
+  final String title;
 
-  SelectorList({@required this.elements, this.height = 150, @required this.values});
+  SelectorList({
+    @required this.elements,
+    this.height = 150,
+    @required this.values,
+    @required this.title,
+  });
 
   @override
   State<StatefulWidget> createState() => SelectorListState();
@@ -97,6 +108,21 @@ class SelectorListState extends State<SelectorList> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              Center(
+                child: SizedBox(
+                  height: 30,
+                  child: Text(
+                    this.widget.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.normal,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (BuildContext context, int index) => Divider(height: 1.0, color: Colors.black54),
@@ -125,13 +151,14 @@ class SelectorListState extends State<SelectorList> {
                             child: GestureDetector(
                               child: this.widget.values.contains(item.value)
                                   ? Icon(
-                                      Icons.check_circle,
+                                      Icons.check,
                                       color: Colors.green,
-                                      size: 30,
+                                      size: 27,
                                     )
                                   : Icon(
-                                      Icons.check_circle_outline,
-                                      size: 30,
+                                      Icons.add,
+                                      color: Colors.grey,
+                                      size: 27,
                                     ),
                               onTap: () {
                                 this.widget.values.contains(item.value) ? this.widget.values.remove(item.value) : this.widget.values.add(item.value);
@@ -160,7 +187,7 @@ class SelectorListState extends State<SelectorList> {
           child: Container(
             color: Colors.white,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 MaterialButton(
                   onPressed: () {
