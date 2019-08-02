@@ -15,17 +15,6 @@ dependencies:
 
 ## Usage example
 
-#### MultipleSelect
-```dart
-MultipleSelect.showMultipleSelector(
-                context,
-                dataList: List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '第$index项显示内容', content: '第$index项下拉内容')),
-              ).then((selectedList) {
-                if (selectedList != null) selectedList.forEach((item) => print(item.display));
-              });
-```
-
-#### MultipleDropDown
 ```dart
 List<MultipleSelectItem> elements = List.generate(15, (index) => MultipleSelectItem.build(value: index, display: '$index display', content: '$index content'));
 
