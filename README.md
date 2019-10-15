@@ -10,7 +10,7 @@ A versatile and beautiful multi-drop-down component for App developers.🚀
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.12
+ multiple_select: ^0.1.13
 ```
 
 ## Usage example
