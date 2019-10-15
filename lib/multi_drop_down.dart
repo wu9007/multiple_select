@@ -32,23 +32,23 @@ class MultipleDropDownState extends State<MultipleDropDown> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: Container(
-              margin: EdgeInsets.only(right: 8),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: this._getContent(),
-                  ),
-                  Opacity(
-                    opacity: this.widget.disabled ? 0.4 : 1,
-                    child: Container(
+            child: Opacity(
+              opacity: this.widget.disabled ? 0.4 : 1,
+              child: Container(
+                margin: EdgeInsets.only(right: 8),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: this._getContent(),
+                    ),
+                    Container(
                       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
                       child: Icon(Icons.list, color: Colors.black54),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
               ),
-              decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
             ),
           ),
         ],
@@ -88,18 +88,18 @@ class MultipleDropDownState extends State<MultipleDropDown> {
             .where((element) => this.widget.values.contains(element.value))
             .map(
               (element) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 1),
-                child: RawChip(
-                  isEnabled: !this.widget.disabled,
-                  label: Text(element.display),
-                  onDeleted: () {
-                    if (!this.widget.disabled) {
-                      this.widget.values.remove(element.value);
-                      this.setState(() {});
-                    }
-                  },
-                ),
-              ),
+                    padding: EdgeInsets.symmetric(horizontal: 1),
+                    child: RawChip(
+                      isEnabled: !this.widget.disabled,
+                      label: Text(element.display),
+                      onDeleted: () {
+                        if (!this.widget.disabled) {
+                          this.widget.values.remove(element.value);
+                          this.setState(() {});
+                        }
+                      },
+                    ),
+                  ),
             )
             .toList(),
       );
