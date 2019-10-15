@@ -82,7 +82,7 @@ class SelectorList<T> extends StatefulWidget {
 
   SelectorList({
     @required this.elements,
-    this.height = 150,
+    this.height = 200,
     @required this.values,
     @required this.title,
   });
@@ -184,20 +184,18 @@ class SelectorListState extends State<SelectorList> {
           bottom: 0,
           left: 0,
           right: 0,
-          child: Container(
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                MaterialButton(
-                  onPressed: () {
-                    Navigator.pop(context, this.widget.values);
-                  },
-                  child: Icon(Icons.close),
-                ),
-              ],
+          child: GestureDetector(
+            onTap: () => Navigator.pop(context, this.widget.values),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(width: 2, color: Colors.grey[350])),
+                color: Colors.grey[200],
+              ),
+              child: Center(
+                child: Icon(Icons.close),
+              ),
+              height: 40,
             ),
-            height: 38,
           ),
         ),
       ],

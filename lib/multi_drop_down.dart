@@ -40,7 +40,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
                     child: this._getContent(),
                   ),
                   Opacity(
-                    opacity: this.widget.disabled ? 0.5 : 1,
+                    opacity: this.widget.disabled ? 0.4 : 1,
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
                       child: Icon(Icons.list, color: Colors.black54),
