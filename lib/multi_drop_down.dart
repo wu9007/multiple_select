@@ -79,7 +79,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
             decoration: TextDecoration.none,
           ),
         ),
-        padding: EdgeInsets.only(top: 6, bottom: 6, left: 10),
+        padding: EdgeInsets.only(top: 8, bottom: 8, left: 10),
       );
     } else {
       return Wrap(
