@@ -190,29 +190,22 @@ class SelectorListState extends State<SelectorList> {
         left: 0,
         right: 0,
         height: 40,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(child: Text('123')),
+        child: GestureDetector(
+          onTap: () => Navigator.pop(context, values),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(top: BorderSide(width: 2, color: Colors.grey[350])),
+              color: Colors.grey[200],
             ),
-            GestureDetector(
-              onTap: () => Navigator.pop(context, values),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(top: BorderSide(width: 2, color: Colors.grey[350])),
-                  color: Colors.grey[200],
-                ),
-                child: Container(
-                  child: Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 35,
-                  ),
-                ),
-                height: 40,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              child: Icon(
+                Icons.keyboard_arrow_down,
+                size: 35,
               ),
             ),
-          ],
+            height: 40,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+          ),
         ),
       );
 }
