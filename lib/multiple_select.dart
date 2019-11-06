@@ -129,44 +129,44 @@ class SelectorListState extends State<SelectorList> {
                   itemCount: this._elements.length,
                   itemBuilder: (context, index) {
                     MultipleSelectItem item = this._elements[index];
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            flex: 6,
-                            child: Text(
-                              item.content.toString(),
-                              style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.black87,
-                                fontWeight: FontWeight.normal,
-                                decoration: TextDecoration.none,
+                    return GestureDetector(
+                      onTap: () {
+                        this.widget.values.contains(item.value) ? this.widget.values.remove(item.value) : this.widget.values.add(item.value);
+                        this.setState(() {});
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 6,
+                              child: Text(
+                                item.content.toString(),
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.normal,
+                                  decoration: TextDecoration.none,
+                                ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: GestureDetector(
+                            Expanded(
+                              flex: 1,
                               child: this.widget.values.contains(item.value)
                                   ? Icon(
-                                      Icons.check,
-                                      color: Colors.green,
-                                      size: 27,
+                                      Icons.radio_button_checked,
+                                      color: Colors.black54,
+                                      size: 30,
                                     )
                                   : Icon(
                                       Icons.add,
                                       color: Colors.grey,
-                                      size: 27,
+                                      size: 30,
                                     ),
-                              onTap: () {
-                                this.widget.values.contains(item.value) ? this.widget.values.remove(item.value) : this.widget.values.add(item.value);
-                                this.setState(() {});
-                              },
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -178,29 +178,43 @@ class SelectorListState extends State<SelectorList> {
             BoxShadow(color: Colors.black54, blurRadius: 5.0),
           ]),
           padding: EdgeInsets.only(top: 20, bottom: 5, left: 6, right: 6),
-          margin: EdgeInsets.only(top: this.widget.height, bottom: 38.5),
+          margin: EdgeInsets.only(top: this.widget.height, bottom: 40),
         ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: GestureDetector(
-            onTap: () => Navigator.pop(context, this.widget.values),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(top: BorderSide(width: 2, color: Colors.grey[350])),
-                color: Colors.grey[200],
-              ),
-              child: Center(
-                child: Icon(Icons.close),
-              ),
-              height: 40,
-            ),
-          ),
-        ),
+        this.getToolbar(context, this.widget.values),
       ],
     );
   }
+
+  var getToolbar = (context, values) => Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 40,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(child: Text('123')),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.pop(context, values),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(width: 2, color: Colors.grey[350])),
+                  color: Colors.grey[200],
+                ),
+                child: Container(
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 35,
+                  ),
+                ),
+                height: 40,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+              ),
+            ),
+          ],
+        ),
+      );
 }
 
 class MultipleSelectItem<V, D, C> {
