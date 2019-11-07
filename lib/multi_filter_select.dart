@@ -68,7 +68,11 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
               padding: EdgeInsets.only(top: 8, bottom: 8, left: 10),
             ),
           ),
-          this.widget.tail,
+          this.widget.tail ??
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
+                child: Icon(Icons.list, color: Colors.black54, size: 25),
+              ),
         ],
       ),
       decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
@@ -86,16 +90,22 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             .widget
             .allItems
             .where((item) => this._selectedValue.contains(item.value))
-            .map((item) => Container(
-                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                  child: Text(
-                    item.content,
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(width: 1, style: BorderStyle.solid, color: Colors.black12),
-                    borderRadius: BorderRadius.circular(8.0),
+            .map((item) => GestureDetector(
+                  onLongPress: () {
+                    this._selectedValue.remove(item.value);
+                    this.setState(() {});
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                    child: Text(
+                      item.content,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(width: 1, style: BorderStyle.solid, color: Colors.black12),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                 ))
             .toList(),

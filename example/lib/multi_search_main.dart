@@ -35,11 +35,6 @@ class MyAppState extends State<MyApp> {
         body: MultiFilterSelect(
           allItems: items,
           initValue: _initValue,
-          placeholder: '搜索',
-          tail: Container(
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
-            child: Icon(Icons.list, color: Colors.black54, size: 25),
-          ),
           selectCallback: (List selectedValue) {
             print(selectedValue.length);
           },

@@ -49,3 +49,7 @@
 ## [0.1.14] - 2019/10/15.
 
 * update style.
+
+## [0.1.15] - 2019/10/15.
+
+* supply a function of fuzzy query.

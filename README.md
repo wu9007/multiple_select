@@ -5,16 +5,39 @@
 
 A versatile and beautiful multi-drop-down component for App developers.🚀
 
-![select.gif](./example/android/app/src/main/res/drawable/selector.gif)
 ## Getting Started
 
 ```yaml
 dependencies:
- multiple_select: ^0.1.14
+ multiple_select: ^0.1.15
 ```
 
 ## Usage example
 
+### Matching query and Multiple select
+![](https://github.com/wechat-program/album/blob/master/gif/flutter/form-component/mylti_search_select.gif?raw=true)
+```dart
+List<Item<num, String, String>> items = List.generate(
+  150,
+      (index) =>
+      Item.build(
+        value: index,
+        display: '$index display',
+        content: '$index content' * (index + 1),
+      ),
+);
+
+List<num> _initValue = [1, 2, 6];
+
+MultiFilterSelect(
+          allItems: items,
+          initValue: _initValue,
+          selectCallback: (List selectedValue) => print(selectedValue.length),
+        )
+```
+
+### Drop down with no filter
+![](https://github.com/wechat-program/album/blob/master/gif/flutter/form-component/multi_select.gif?raw=true)
 ```dart
 /// Simulate 15 data
 List<MultipleSelectItem> elements = List.generate(
