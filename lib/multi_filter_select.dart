@@ -1,21 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:multiple_select/search_page.dart';
+import 'package:multiple_select/Item.dart';
+import 'package:multiple_select/multi_filter_select_page.dart';
 
 /// 模糊查询多选
-class MultiSearchSelect extends StatefulWidget {
+class MultiFilterSelect extends StatefulWidget {
   final double height;
   final String placeholder;
   final double fontSize;
   final Widget tail;
+  final List<Item> allItems;
+  final List initValue;
 
-  MultiSearchSelect({this.height, this.placeholder, this.fontSize, this.tail});
+  MultiFilterSelect({
+    this.height,
+    this.placeholder,
+    this.fontSize,
+    this.tail,
+    @required this.allItems,
+    this.initValue,
+  });
 
   @override
-  State<StatefulWidget> createState() => MultiSearchSelectState();
+  State<StatefulWidget> createState() => MultiFilterSelectState();
 }
 
-class MultiSearchSelectState extends State<MultiSearchSelect> {
+class MultiFilterSelectState extends State<MultiFilterSelect> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +34,11 @@ class MultiSearchSelectState extends State<MultiSearchSelect> {
         children: <Widget>[
           Expanded(
             child: GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => SearchPage())),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => MultiFilterSelectPage(
+                        allItems: this.widget.allItems,
+                        initValue: this.widget.initValue ?? [],
+                      ))),
               child: Padding(
                 child: Text(
                   this.widget.placeholder ?? '',

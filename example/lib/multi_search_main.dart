@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_select/multi_search.dart';
+import 'package:multiple_select/multi_filter_select.dart';
+import 'package:multiple_select/Item.dart';
+
+List<Item<num, String, String>> items = List.generate(
+  150,
+  (index) => Item.build(
+    value: index,
+    display: '$index display',
+    content: '$index content' * (index + 1),
+  ),
+);
+
+List<num> _initValue = [1, 2, 10];
 
 void main() => runApp(MyApp());
 
@@ -19,7 +31,9 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Multiple Select Demo Page'),
         ),
-        body: MultiSearchSelect(
+        body: MultiFilterSelect(
+          allItems: items,
+          initValue: _initValue,
           placeholder: '搜索',
           tail: Container(
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
