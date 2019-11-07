@@ -4,11 +4,12 @@ import 'package:multiple_select/Item.dart';
 
 List<Item<num, String, String>> items = List.generate(
   150,
-  (index) => Item.build(
-    value: index,
-    display: '$index display',
-    content: '$index content' * (index + 1),
-  ),
+      (index) =>
+      Item.build(
+        value: index,
+        display: '$index display',
+        content: '$index content' * (index + 1),
+      ),
 );
 
 List<num> _initValue = [1, 2, 10];
@@ -39,6 +40,9 @@ class MyAppState extends State<MyApp> {
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 5.5),
             child: Icon(Icons.list, color: Colors.black54, size: 25),
           ),
+          selectCallback: (List selectedValue) {
+            print(selectedValue.length);
+          },
         ),
       ),
     );
