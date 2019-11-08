@@ -70,7 +70,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             child: Padding(
               child: Text(
                 this.widget.placeholder ?? '',
-                style: TextStyle(fontSize: this.widget.fontSize ?? 16, color: Colors.black26, decoration: TextDecoration.none),
+                style: TextStyle(fontSize: this.widget.fontSize ?? 16, color: Colors.black54, decoration: TextDecoration.none),
               ),
               padding: EdgeInsets.only(top: 8, bottom: 8, left: 10),
             ),
