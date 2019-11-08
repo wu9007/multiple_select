@@ -57,3 +57,7 @@
 ## [0.1.16] - 2019/11/08.
 
 * add a config to disabled the component.
+
+## [0.1.17] - 2019/11/08.
+
+* display.
