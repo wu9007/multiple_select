@@ -115,7 +115,7 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
       ),
       onWillPop: () {
         Navigator.pop(context, this.selectedItemValueList);
-        return null;
+        return new Future.value(false);
       },
     );
   }

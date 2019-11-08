@@ -107,7 +107,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                     child: Text(
-                      item.content,
+                      item.display,
                       style: TextStyle(fontSize: 15),
                     ),
                     decoration: BoxDecoration(
