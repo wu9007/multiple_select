@@ -14,6 +14,7 @@ class MultiFilterSelect extends StatefulWidget {
   final List<Item> allItems;
   final List initValue;
   final SelectCallback selectCallback;
+  final bool disabled;
 
   MultiFilterSelect({
     this.height,
@@ -23,6 +24,7 @@ class MultiFilterSelect extends StatefulWidget {
     @required this.allItems,
     this.initValue,
     @required this.selectCallback,
+    this.disabled = false,
   });
 
   @override
@@ -40,17 +42,22 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        this._selectedValue = await Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => MultiFilterSelectPage(
-                  allItems: this.widget.allItems,
-                  initValue: this.widget.initValue ?? [],
-                )));
-        this.setState(() {});
-        this.widget.selectCallback(_selectedValue);
-      },
-      child: this._selectedValue.length > 0 ? this._getValueWrp() : this._getEmptyWrp(),
+    return Opacity(
+      opacity: this.widget.disabled ? 0.4 : 1,
+      child: GestureDetector(
+        onTap: () async {
+          if (!this.widget.disabled) {
+            this._selectedValue = await Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => MultiFilterSelectPage(
+                      allItems: this.widget.allItems,
+                      initValue: this.widget.initValue ?? [],
+                    )));
+            this.setState(() {});
+            this.widget.selectCallback(_selectedValue);
+          }
+        },
+        child: this._selectedValue.length > 0 ? this._getValueWrp() : this._getEmptyWrp(),
+      ),
     );
   }
 
@@ -92,8 +99,10 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             .where((item) => this._selectedValue.contains(item.value))
             .map((item) => GestureDetector(
                   onLongPress: () {
-                    this._selectedValue.remove(item.value);
-                    this.setState(() {});
+                    if (!this.widget.disabled) {
+                      this._selectedValue.remove(item.value);
+                      this.setState(() {});
+                    }
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),

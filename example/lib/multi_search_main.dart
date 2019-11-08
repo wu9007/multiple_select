@@ -8,7 +8,7 @@ List<Item<num, String, String>> items = List.generate(
       Item.build(
         value: index,
         display: '$index display',
-        content: '$index content' * (index + 1),
+        content: '$index content',
       ),
 );
 
@@ -35,6 +35,7 @@ class MyAppState extends State<MyApp> {
         body: MultiFilterSelect(
           allItems: items,
           initValue: _initValue,
+          placeholder: 'search...',
           selectCallback: (List selectedValue) {
             print(selectedValue.length);
           },

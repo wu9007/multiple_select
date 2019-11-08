@@ -50,6 +50,10 @@
 
 * update style.
 
-## [0.1.15] - 2019/10/15.
+## [0.1.15] - 2019/11/07.
 
-* supply a function of fuzzy query.
+* filter select.
+
+## [0.1.16] - 2019/11/08.
+
+* add a config to disabled the component.
