@@ -46,7 +46,7 @@ class MyAppState extends State<MyApp> {
               onPressed: () {
                 this.setState(() {
                   if (this._initValue != null && this._initValue.length > 0) {
-                    this._initValue = [];
+                    this._initValue = null;
                   } else {
                     this._initValue = [1, 2, 3];
                   }

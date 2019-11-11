@@ -36,7 +36,11 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
 
   @override
   Widget build(BuildContext context) {
-    if (this.widget.initValue != null) this._selectedValue = this.widget.initValue;
+    if (this.widget.initValue == null) {
+      this._selectedValue = [];
+    } else {
+      this._selectedValue = this.widget.initValue;
+    }
     return Opacity(
       opacity: this.widget.disabled ? 0.4 : 1,
       child: GestureDetector(
