@@ -4,15 +4,12 @@ import 'package:multiple_select/Item.dart';
 
 List<Item<num, String, String>> items = List.generate(
   150,
-      (index) =>
-      Item.build(
-        value: index,
-        display: '$index display',
-        content: '$index content',
-      ),
+  (index) => Item.build(
+    value: index,
+    display: '$index display',
+    content: '$index content',
+  ),
 );
-
-List<num> _initValue = [1, 2, 10];
 
 void main() => runApp(MyApp());
 
@@ -22,6 +19,8 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  List<num> _initValue = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,13 +31,29 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Multiple Select Demo Page'),
         ),
-        body: MultiFilterSelect(
-          allItems: items,
-          initValue: _initValue,
-          placeholder: 'search...',
-          selectCallback: (List selectedValue) {
-            print(selectedValue.length);
-          },
+        body: Column(
+          children: <Widget>[
+            MultiFilterSelect(
+              allItems: items,
+              initValue: _initValue,
+              placeholder: 'search...',
+              selectCallback: (List selectedValue) {
+                print(selectedValue.length);
+              },
+            ),
+            MaterialButton(
+              child: Text('change data'),
+              onPressed: () {
+                this.setState(() {
+                  if (this._initValue != null && this._initValue.length > 0) {
+                    this._initValue = [];
+                  } else {
+                    this._initValue = [1, 2, 3];
+                  }
+                });
+              },
+            )
+          ],
         ),
       ),
     );
