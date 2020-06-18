@@ -8,8 +8,8 @@ typedef SelectCallback = Function(List selectedValue);
 /// 模糊查询多选
 class MultiFilterSelect extends StatefulWidget {
   final double height;
-  final String placeholder;
-  final double fontSize;
+  final String hintText;
+  final TextStyle hintStyle;
   final Widget tail;
   final List<Item> allItems;
   final List initValue;
@@ -18,8 +18,8 @@ class MultiFilterSelect extends StatefulWidget {
 
   MultiFilterSelect({
     this.height,
-    this.placeholder,
-    this.fontSize,
+    this.hintText,
+    this.hintStyle,
     this.tail,
     @required this.allItems,
     this.initValue,
@@ -46,16 +46,21 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
       child: GestureDetector(
         onTap: () async {
           if (!this.widget.disabled) {
-            this._selectedValue = await Navigator.of(context).push(MaterialPageRoute(
+            this._selectedValue = await Navigator.of(context).push(
+              MaterialPageRoute(
                 builder: (_) => MultiFilterSelectPage(
-                      allItems: this.widget.allItems,
-                      initValue: this.widget.initValue ?? [],
-                    )));
+                  allItems: this.widget.allItems,
+                  initValue: this.widget.initValue ?? [],
+                ),
+              ),
+            );
             this.setState(() {});
             this.widget.selectCallback(_selectedValue);
           }
         },
-        child: this._selectedValue.length > 0 ? this._getValueWrp() : this._getEmptyWrp(),
+        child: this._selectedValue.length > 0
+            ? this._getValueWrp()
+            : this._getEmptyWrp(),
       ),
     );
   }
@@ -68,8 +73,12 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
           Expanded(
             child: Padding(
               child: Text(
-                this.widget.placeholder ?? '',
-                style: TextStyle(fontSize: this.widget.fontSize ?? 16, color: Colors.black54, decoration: TextDecoration.none),
+                this.widget.hintText ?? '',
+                style: this.widget.hintStyle ??
+                    TextStyle(
+                        fontSize: 16,
+                        color: Colors.black54,
+                        decoration: TextDecoration.none),
               ),
               padding: EdgeInsets.only(top: 8, bottom: 8, left: 10),
             ),
@@ -81,7 +90,11 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
               ),
         ],
       ),
-      decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 0.5, color: Colors.grey[350]),
+        ),
+      ),
     );
   }
 
@@ -96,29 +109,38 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             .widget
             .allItems
             .where((item) => this._selectedValue.contains(item.value))
-            .map((item) => GestureDetector(
-                  onLongPress: () {
-                    if (!this.widget.disabled) {
-                      this._selectedValue.remove(item.value);
-                      this.setState(() {});
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                    child: Text(
-                      item.display,
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      border: Border.all(width: 1, style: BorderStyle.solid, color: Colors.black12),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+            .map(
+              (item) => GestureDetector(
+                onLongPress: () {
+                  if (!this.widget.disabled) {
+                    this._selectedValue.remove(item.value);
+                    this.setState(() {});
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                  child: Text(
+                    item.display,
+                    style: TextStyle(fontSize: 15),
                   ),
-                ))
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border.all(
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: Colors.black12),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            )
             .toList(),
       ),
-      decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(width: 0.5, color: Colors.grey[350]),
+        ),
+      ),
     );
   }
 }
