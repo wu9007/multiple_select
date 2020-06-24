@@ -50,7 +50,13 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                 constraints: BoxConstraints(maxHeight: 33, maxWidth: 280),
                 child: TextField(
                   onChanged: (text) {
-                    this.filterItemList = this.widget.allItems.where((item) => item.display.toString().contains(text) || item.content.toString().contains(text)).toList();
+                    this.filterItemList = this
+                        .widget
+                        .allItems
+                        .where((item) =>
+                            item.display.toString().contains(text) ||
+                            item.content.toString().contains(text))
+                        .toList();
                     this.setState(() {});
                   },
                   autofocus: true,
@@ -58,7 +64,8 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                   cursorColor: Colors.grey,
                   cursorWidth: 1.5,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 0, bottom: 0, left: 10),
+                      contentPadding:
+                          EdgeInsets.only(top: 0, bottom: 0, left: 10),
                       fillColor: Colors.black12,
                       filled: true,
                       suffixIcon: Icon(
@@ -66,8 +73,12 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                         size: 20,
                         color: Colors.grey,
                       ),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(25.0), borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25.0), borderSide: BorderSide.none),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide.none),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide.none),
                       hintText: this.widget.placeholder ?? 'search……'),
                 ),
               ),
@@ -84,7 +95,8 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
               runSpacing: 8.0,
               children: filterItemList.map(
                 (item) {
-                  bool _selected = this.selectedItemValueList.contains(item.value);
+                  bool _selected =
+                      this.selectedItemValueList.contains(item.value);
                   return GestureDetector(
                     onTap: () {
                       if (_selected) {
@@ -102,7 +114,11 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                       ),
                       decoration: BoxDecoration(
                         color: _selected ? Colors.blue[50] : Colors.grey[200],
-                        border: Border.all(width: 1, style: BorderStyle.solid, color: _selected ? Colors.blue[200] : Colors.black12),
+                        border: Border.all(
+                            width: 1,
+                            style: BorderStyle.solid,
+                            color:
+                                _selected ? Colors.blue[200] : Colors.black12),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),

@@ -19,7 +19,10 @@ List<MultipleSelectItem> elements = List.generate(
   ),
 );
 
-List _selectedValues = elements.where((element) => element.value % 2 == 0).map((item) => item.value).toList();
+List _selectedValues = elements
+    .where((element) => element.value % 2 == 0)
+    .map((item) => item.value)
+    .toList();
 
 class MyAppState extends State<MyApp> {
   @override

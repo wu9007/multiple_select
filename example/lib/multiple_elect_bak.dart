@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multiple_select/multiple_select.dart';
 
-
 class MultipleSelectBak extends StatefulWidget {
   MultipleSelectBak({Key key, this.title}) : super(key: key);
   final String title;
@@ -10,7 +9,8 @@ class MultipleSelectBak extends StatefulWidget {
   _MultipleSelectState createState() => _MultipleSelectState();
 }
 
-class _MultipleSelectState extends State<MultipleSelectBak> with SingleTickerProviderStateMixin {
+class _MultipleSelectState extends State<MultipleSelectBak>
+    with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _animation;
 
@@ -20,11 +20,13 @@ class _MultipleSelectState extends State<MultipleSelectBak> with SingleTickerPro
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 120));
-    _animation = Tween(begin: 0.0, end: this._unfoldedHeight).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 120));
+    _animation =
+        Tween(begin: 0.0, end: this._unfoldedHeight).animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -43,7 +45,9 @@ class _MultipleSelectState extends State<MultipleSelectBak> with SingleTickerPro
                     setState(() {
                       this._folded = !this._folded;
                     });
-                    this._folded ? this._controller.reverse(from: this._animation.value) : this._controller.forward(from: this._animation.value);
+                    this._folded
+                        ? this._controller.reverse(from: this._animation.value)
+                        : this._controller.forward(from: this._animation.value);
                   },
                   color: Colors.amber,
                   child: Icon(Icons.child_friendly),
@@ -52,7 +56,9 @@ class _MultipleSelectState extends State<MultipleSelectBak> with SingleTickerPro
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MultipleSelectRoute(barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel),
+                      MultipleSelectRoute(
+                          barrierLabel: MaterialLocalizations.of(context)
+                              .modalBarrierDismissLabel),
                     );
                   },
                   color: Colors.deepOrange,

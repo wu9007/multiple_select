@@ -81,3 +81,7 @@
 ## [0.1.22] - 2019/11/11.
 
 * fix a bug.
+
+## [0.1.23] - 2020/06/24.
+
+* Rename placeHolder into hintText. Apply hintStyle (TextStyle) to hintText instead of using fontSize.
