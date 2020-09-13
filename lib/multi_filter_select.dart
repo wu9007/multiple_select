@@ -15,12 +15,14 @@ class MultiFilterSelect extends StatefulWidget {
   final List initValue;
   final SelectCallback selectCallback;
   final bool disabled;
+  final bool searchCaseSensitive;
 
   MultiFilterSelect({
     this.height,
     this.hintText,
     this.hintStyle,
     this.tail,
+    this.searchCaseSensitive,
     @required this.allItems,
     this.initValue,
     @required this.selectCallback,
@@ -50,6 +52,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
               MaterialPageRoute(
                 builder: (_) => MultiFilterSelectPage(
                   allItems: this.widget.allItems,
+                  searchCaseSensitive: this.widget.searchCaseSensitive ?? false,
                   initValue: this.widget.initValue ?? [],
                 ),
               ),
