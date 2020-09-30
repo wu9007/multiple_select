@@ -15,6 +15,7 @@ class MultiFilterSelect extends StatefulWidget {
   final List initValue;
   final SelectCallback selectCallback;
   final bool disabled;
+  final bool autoOpenKeyboard;
 
   MultiFilterSelect({
     this.height,
@@ -25,6 +26,7 @@ class MultiFilterSelect extends StatefulWidget {
     this.initValue,
     @required this.selectCallback,
     this.disabled = false,
+    this.autoOpenKeyboard
   });
 
   @override
@@ -51,6 +53,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
                 builder: (_) => MultiFilterSelectPage(
                   allItems: this.widget.allItems,
                   initValue: this.widget.initValue ?? [],
+                  autoFocusKeyboard: this.widget.autoOpenKeyboard,
                 ),
               ),
             );

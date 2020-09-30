@@ -36,6 +36,7 @@ class MyAppState extends State<MyApp> {
             MultiFilterSelect(
               allItems: items,
               initValue: _initValue,
+              autoOpenKeyboard: false,
               hintText: 'search...',
               selectCallback: (List selectedValue) {
                 print(selectedValue.length);
