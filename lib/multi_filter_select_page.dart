@@ -6,6 +6,7 @@ class MultiFilterSelectPage extends StatefulWidget {
   final String placeholder;
   final List<Item> allItems;
   final List initValue;
+  final bool autoFocusKeyboard;
   final bool searchCaseSensitive;
 
   MultiFilterSelectPage({
@@ -13,6 +14,7 @@ class MultiFilterSelectPage extends StatefulWidget {
     @required this.searchCaseSensitive,
     @required this.allItems,
     @required this.initValue,
+    this.autoFocusKeyboard
   });
 
   @override
@@ -55,7 +57,7 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                     this.filterItemList = _filterItems(text);
                     this.setState(() {});
                   },
-                  autofocus: true,
+                  autofocus: this.widget.autoFocusKeyboard??true,
                   style: TextStyle(fontSize: 14),
                   cursorColor: Colors.grey,
                   cursorWidth: 1.5,
