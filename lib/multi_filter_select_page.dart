@@ -7,9 +7,11 @@ class MultiFilterSelectPage extends StatefulWidget {
   final List<Item> allItems;
   final List initValue;
   final bool autoFocusKeyboard;
+  final bool searchCaseSensitive;
 
   MultiFilterSelectPage({
     this.placeholder,
+    @required this.searchCaseSensitive,
     @required this.allItems,
     @required this.initValue,
     this.autoFocusKeyboard
@@ -52,13 +54,7 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                 constraints: BoxConstraints(maxHeight: 33, maxWidth: 280),
                 child: TextField(
                   onChanged: (text) {
-                    this.filterItemList = this
-                        .widget
-                        .allItems
-                        .where((item) =>
-                            item.display.toString().contains(text) ||
-                            item.content.toString().contains(text))
-                        .toList();
+                    this.filterItemList = _filterItems(text);
                     this.setState(() {});
                   },
                   autofocus: this.widget.autoFocusKeyboard??true,
@@ -136,5 +132,24 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
         return new Future.value(false);
       },
     );
+  }
+
+  List<Item> _filterItems(String searchString) {
+    return this
+        .widget
+        .allItems
+        .where((item) => _itemInSearch(searchString, item))
+        .toList();
+  }
+
+  bool _itemInSearch(String searchString, Item item) {
+    if (this.widget.searchCaseSensitive) {
+      return item.display.toString().contains(searchString) ||
+          item.content.toString().contains(searchString);
+    } else {
+      searchString = searchString.toLowerCase();
+      return item.display.toString().toLowerCase().contains(searchString) ||
+          item.content.toString().toLowerCase().contains(searchString);
+    }
   }
 }
