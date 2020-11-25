@@ -10,6 +10,7 @@ class MultiFilterSelect extends StatefulWidget {
   final double height;
   final String hintText;
   final TextStyle hintStyle;
+  final double fontSize;
   final Widget tail;
   final List<Item> allItems;
   final List initValue;
@@ -22,13 +23,14 @@ class MultiFilterSelect extends StatefulWidget {
     this.height,
     this.hintText,
     this.hintStyle,
+    this.fontSize,
     this.tail,
-    this.searchCaseSensitive,
     @required this.allItems,
     this.initValue,
     @required this.selectCallback,
     this.disabled = false,
-    this.autoOpenKeyboard
+    this.autoOpenKeyboard = true,
+    this.searchCaseSensitive = false,
   });
 
   @override
@@ -50,16 +52,14 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
       child: GestureDetector(
         onTap: () async {
           if (!this.widget.disabled) {
-            this._selectedValue = await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => MultiFilterSelectPage(
-                  allItems: this.widget.allItems,
-                  searchCaseSensitive: this.widget.searchCaseSensitive ?? false,
-                  initValue: this.widget.initValue ?? [],
-                  autoFocusKeyboard: this.widget.autoOpenKeyboard,
-                ),
-              ),
-            );
+            this._selectedValue =
+                await Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => MultiFilterSelectPage(
+                          allItems: this.widget.allItems,
+                          searchCaseSensitive: this.widget.searchCaseSensitive,
+                          initValue: this.widget.initValue ?? [],
+                          autoFocusKeyboard: this.widget.autoOpenKeyboard,
+                        )));
             this.setState(() {});
             this.widget.selectCallback(_selectedValue);
           }
@@ -82,7 +82,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
                 this.widget.hintText ?? '',
                 style: this.widget.hintStyle ??
                     TextStyle(
-                        fontSize: 16,
+                        fontSize: this.widget.fontSize ?? 16,
                         color: Colors.black54,
                         decoration: TextDecoration.none),
               ),
@@ -97,10 +97,8 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
         ],
       ),
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 0.5, color: Colors.grey[350]),
-        ),
-      ),
+          border:
+              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
     );
   }
 
@@ -115,38 +113,34 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             .widget
             .allItems
             .where((item) => this._selectedValue.contains(item.value))
-            .map(
-              (item) => GestureDetector(
-                onLongPress: () {
-                  if (!this.widget.disabled) {
-                    this._selectedValue.remove(item.value);
-                    this.setState(() {});
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-                  child: Text(
-                    item.display,
-                    style: TextStyle(fontSize: 15),
+            .map((item) => GestureDetector(
+                  onLongPress: () {
+                    if (!this.widget.disabled) {
+                      this._selectedValue.remove(item.value);
+                      this.setState(() {});
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+                    child: Text(
+                      item.display,
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(
+                          width: 1,
+                          style: BorderStyle.solid,
+                          color: Colors.black12),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    border: Border.all(
-                        width: 1,
-                        style: BorderStyle.solid,
-                        color: Colors.black12),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
-            )
+                ))
             .toList(),
       ),
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: 0.5, color: Colors.grey[350]),
-        ),
-      ),
+          border:
+              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
     );
   }
 }

@@ -3,8 +3,6 @@ import 'package:multiple_select/multiple_select.dart';
 
 import 'package:multiple_select/multi_drop_down.dart';
 
-void main() => runApp(MyApp());
-
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MyAppState();

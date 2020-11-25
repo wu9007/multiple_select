@@ -11,8 +11,6 @@ List<Item<num, String, String>> items = List.generate(
   ),
 );
 
-void main() => runApp(MyApp());
-
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MyAppState();

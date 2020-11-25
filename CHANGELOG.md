@@ -85,3 +85,8 @@
 ## [0.1.23] - 2020/06/24.
 
 * Rename placeHolder into hintText. Apply hintStyle (TextStyle) to hintText instead of using fontSize.
+
+## [0.1.24] - 2020/11/25.
+
+* Add option to enable/disable case-sensitive search.
+* Add option to make focusing of search field optional.
