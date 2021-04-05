@@ -8,15 +8,14 @@ class MultipleSelect {
   ///
   static Future showMultipleSelector(
     BuildContext context, {
-    @required List<MultipleSelectItem> elements,
-    @required values,
-    @required String title,
+    required List<MultipleSelectItem> elements,
+    required values,
+    required String? title,
   }) {
     return Navigator.push(
       context,
       MultipleSelectRoute<List>(
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
         elements: elements,
         values: values,
         title: title,
@@ -26,16 +25,16 @@ class MultipleSelect {
 }
 
 class MultipleSelectRoute<T> extends PopupRoute<T> {
-  final String barrierLabel;
+  final String? barrierLabel;
   final List<MultipleSelectItem> elements;
   final List values;
-  final String title;
+  final String? title;
 
   MultipleSelectRoute({
     this.barrierLabel,
-    @required this.elements,
-    @required this.values,
-    @required this.title,
+    required this.elements,
+    required this.values,
+    required this.title,
   });
 
   @override
@@ -47,19 +46,18 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
   @override
   bool get barrierDismissible => true;
 
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
   @override
   AnimationController createAnimationController() {
     assert(_animationController == null);
-    _animationController =
-        BottomSheet.createAnimationController(navigator.overlay);
-    return _animationController;
+    _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
+    return _animationController!;
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = new MediaQuery.removePadding(
       removeTop: true,
       context: context,
@@ -69,7 +67,7 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
         title: this.title,
       ),
     );
-    ThemeData theme = Theme.of(context, shadowThemeOnly: true);
+    ThemeData theme = Theme.of(context);
     if (theme != null) {
       bottomSheet = new Theme(data: theme, child: bottomSheet);
     }
@@ -81,13 +79,13 @@ class SelectorList<T> extends StatefulWidget {
   final List<MultipleSelectItem> elements;
   final double height;
   final List values;
-  final String title;
+  final String? title;
 
   SelectorList({
-    @required this.elements,
+    required this.elements,
     this.height = 200,
-    @required this.values,
-    @required this.title,
+    required this.values,
+    required this.title,
   });
 
   @override
@@ -95,7 +93,7 @@ class SelectorList<T> extends StatefulWidget {
 }
 
 class SelectorListState extends State<SelectorList> {
-  List<MultipleSelectItem> _elements;
+  late List<MultipleSelectItem> _elements;
 
   @override
   initState() {
@@ -115,7 +113,7 @@ class SelectorListState extends State<SelectorList> {
                 child: SizedBox(
                   height: 30,
                   child: Text(
-                    this.widget.title,
+                    this.widget.title!,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black87,
@@ -141,8 +139,7 @@ class SelectorListState extends State<SelectorList> {
                         this.setState(() {});
                       },
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
@@ -183,8 +180,8 @@ class SelectorListState extends State<SelectorList> {
           ),
           decoration: BoxDecoration(
               color: Colors.grey[200],
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              borderRadius:
+                  BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               boxShadow: [
                 BoxShadow(color: Colors.black54, blurRadius: 5.0),
               ]),
@@ -205,8 +202,7 @@ class SelectorListState extends State<SelectorList> {
           onTap: () => Navigator.pop(context, values),
           child: Container(
             decoration: BoxDecoration(
-              border:
-                  Border(top: BorderSide(width: 2, color: Colors.grey[350])),
+              border: Border(top: BorderSide(width: 2, color: Colors.grey[350]!)),
               color: Colors.grey[200],
             ),
             child: Container(
@@ -230,9 +226,9 @@ class MultipleSelectItem<V, D, C> {
   C content;
 
   MultipleSelectItem.build({
-    @required this.value,
-    @required this.display,
-    @required this.content,
+    required this.value,
+    required this.display,
+    required this.content,
   });
 
   MultipleSelectItem.fromJson(
@@ -240,9 +236,9 @@ class MultipleSelectItem<V, D, C> {
     displayKey = 'display',
     valueKey = 'value',
     contentKey = 'content',
-  })  : value = json[valueKey] ?? '',
-        display = json[displayKey] ?? '',
-        content = json[contentKey] ?? '';
+  })  : value = json[valueKey] ?? '' as V,
+        display = json[displayKey] ?? '' as D,
+        content = json[contentKey] ?? '' as C;
 
   static List<MultipleSelectItem> allFromJson(
     List jsonList, {

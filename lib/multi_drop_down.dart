@@ -9,13 +9,13 @@ typedef OnConfirm(List selectedValues);
 class MultipleDropDown extends StatefulWidget {
   final List values;
   final List<MultipleSelectItem> elements;
-  final String placeholder;
+  final String? placeholder;
   final bool disabled;
 
   MultipleDropDown({
-    Key key,
-    @required this.values,
-    @required this.elements,
+    Key? key,
+    required this.values,
+    required this.elements,
     this.placeholder,
     this.disabled = false,
   })  : assert(values != null),
@@ -51,7 +51,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom:
-                            BorderSide(width: 0.5, color: Colors.grey[350]))),
+                            BorderSide(width: 0.5, color: Colors.grey[350]!))),
               ),
             ),
           ),
@@ -75,7 +75,7 @@ class MultipleDropDownState extends State<MultipleDropDown> {
     if (this.widget.values.length <= 0 && this.widget.placeholder != null) {
       return Padding(
         child: Text(
-          this.widget.placeholder,
+          this.widget.placeholder!,
           style: TextStyle(
             fontSize: 16,
             color: Colors.black54,

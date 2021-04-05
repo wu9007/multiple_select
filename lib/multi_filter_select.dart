@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:multiple_select/Item.dart';
 import 'package:multiple_select/multi_filter_select_page.dart';
 
-typedef SelectCallback = Function(List selectedValue);
+typedef SelectCallback = Function(List? selectedValue);
 
 /// 模糊查询多选
 class MultiFilterSelect extends StatefulWidget {
-  final double height;
-  final String hintText;
-  final TextStyle hintStyle;
-  final double fontSize;
-  final Widget tail;
+  final double? height;
+  final String? hintText;
+  final TextStyle? hintStyle;
+  final double? fontSize;
+  final Widget? tail;
   final List<Item> allItems;
-  final List initValue;
+  final List? initValue;
   final SelectCallback selectCallback;
   final bool disabled;
   final bool autoOpenKeyboard;
@@ -25,9 +25,9 @@ class MultiFilterSelect extends StatefulWidget {
     this.hintStyle,
     this.fontSize,
     this.tail,
-    @required this.allItems,
+    required this.allItems,
     this.initValue,
-    @required this.selectCallback,
+    required this.selectCallback,
     this.disabled = false,
     this.autoOpenKeyboard = true,
     this.searchCaseSensitive = false,
@@ -38,7 +38,7 @@ class MultiFilterSelect extends StatefulWidget {
 }
 
 class MultiFilterSelectState extends State<MultiFilterSelect> {
-  List _selectedValue = [];
+  List? _selectedValue = [];
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
             this.widget.selectCallback(_selectedValue);
           }
         },
-        child: this._selectedValue.length > 0
+        child: this._selectedValue!.length > 0
             ? this._getValueWrp()
             : this._getEmptyWrp(),
       ),
@@ -98,7 +98,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
       ),
       decoration: BoxDecoration(
           border:
-              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
+              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]!))),
     );
   }
 
@@ -112,11 +112,11 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
         children: this
             .widget
             .allItems
-            .where((item) => this._selectedValue.contains(item.value))
+            .where((item) => this._selectedValue!.contains(item.value))
             .map((item) => GestureDetector(
                   onLongPress: () {
                     if (!this.widget.disabled) {
-                      this._selectedValue.remove(item.value);
+                      this._selectedValue!.remove(item.value);
                       this.setState(() {});
                     }
                   },
@@ -140,7 +140,7 @@ class MultiFilterSelectState extends State<MultiFilterSelect> {
       ),
       decoration: BoxDecoration(
           border:
-              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]))),
+              Border(bottom: BorderSide(width: 0.5, color: Colors.grey[350]!))),
     );
   }
 }

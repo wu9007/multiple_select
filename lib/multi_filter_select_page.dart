@@ -3,17 +3,17 @@ import 'package:flutter/rendering.dart';
 import 'package:multiple_select/Item.dart';
 
 class MultiFilterSelectPage extends StatefulWidget {
-  final String placeholder;
+  final String? placeholder;
   final List<Item> allItems;
   final List initValue;
-  final bool autoFocusKeyboard;
+  final bool? autoFocusKeyboard;
   final bool searchCaseSensitive;
 
   MultiFilterSelectPage(
       {this.placeholder,
-      @required this.searchCaseSensitive,
-      @required this.allItems,
-      @required this.initValue,
+      required this.searchCaseSensitive,
+      required this.allItems,
+      required this.initValue,
       this.autoFocusKeyboard});
 
   @override
@@ -21,8 +21,8 @@ class MultiFilterSelectPage extends StatefulWidget {
 }
 
 class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
-  List<Item> filterItemList;
-  List selectedItemValueList;
+  late List<Item> filterItemList;
+  List? selectedItemValueList;
 
   @override
   void initState() {
@@ -56,7 +56,7 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                     this.filterItemList = _filterItems(text);
                     this.setState(() {});
                   },
-                  autofocus: this.widget.autoFocusKeyboard,
+                  autofocus: this.widget.autoFocusKeyboard!,
                   style: TextStyle(fontSize: 14),
                   cursorColor: Colors.grey,
                   cursorWidth: 1.5,
@@ -93,13 +93,13 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
               children: filterItemList.map(
                 (item) {
                   bool _selected =
-                      this.selectedItemValueList.contains(item.value);
+                      this.selectedItemValueList!.contains(item.value);
                   return GestureDetector(
                     onTap: () {
                       if (_selected) {
-                        this.selectedItemValueList.remove(item.value);
+                        this.selectedItemValueList!.remove(item.value);
                       } else {
-                        this.selectedItemValueList.add(item.value);
+                        this.selectedItemValueList!.add(item.value);
                       }
                       this.setState(() {});
                     },
@@ -115,7 +115,7 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                             width: 1,
                             style: BorderStyle.solid,
                             color:
-                                _selected ? Colors.blue[200] : Colors.black12),
+                                _selected ? Colors.blue[200]! : Colors.black12),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
