@@ -106,11 +106,15 @@ class MultiFilterSelectPageState extends State<MultiFilterSelectPage> {
                 padding: const EdgeInsets.only(left: 8.0),
                 child: GestureDetector(
                   onTap: () {
-                    setState(
-                      () {
-                        this.selectedItemValueList = [];
-                      },
-                    );
+                    for (var a in filterItemList) {
+                      bool _selected = this.selectedItemValueList!.contains(a.value);
+
+                      if (_selected) {
+                        setState(() {
+                          this.selectedItemValueList!.remove(a.value);
+                        });
+                      }
+                    }
                   },
                   child: Icon(
                     Icons.remove_circle_outline,

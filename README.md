@@ -32,7 +32,11 @@ List<num> _initValue = [1, 2, 6];
 MultiFilterSelect(
           allItems: items,
           initValue: _initValue,
-          selectCallback: (List selectedValue) => print(selectedValue.length),
+          selectCallback: (List selectedValue) => print(selectedValue.length,
+          textColor: Colors.black,
+          backgroundColor: Colors.blue,
+          selectedTextColor: Colors.black,
+          selectedBackgroundColor: Colors.grey,),
         )
 ```
 
