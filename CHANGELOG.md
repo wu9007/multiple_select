@@ -90,3 +90,13 @@
 
 * Add option to enable/disable case-sensitive search.
 * Add option to make focusing of search field optional.
+
+$$ [1.0.0] - 2021/4/11
+
+* Add Select all 
+* Add Clear all
+* Add Text Color 
+* Add Background Color
+* Add Selected Text Color
+* Add Selected Background Color
+* Add Border Colors

@@ -10,9 +10,9 @@ class Item<V, D, C> {
   C content;
 
   Item.build({
-    @required this.value,
-    @required this.display,
-    @required this.content,
+    required this.value,
+    required this.display,
+    required this.content,
   });
 
   Item.fromJson(
@@ -20,9 +20,9 @@ class Item<V, D, C> {
     displayKey = 'display',
     valueKey = 'value',
     contentKey = 'content',
-  })  : value = json[valueKey] ?? '',
-        display = json[displayKey] ?? '',
-        content = json[contentKey] ?? '';
+  })  : value = json[valueKey] ?? '' as V,
+        display = json[displayKey] ?? '' as D,
+        content = json[contentKey] ?? '' as C;
 
   static List<Item> allFromJson(
     List jsonList, {
