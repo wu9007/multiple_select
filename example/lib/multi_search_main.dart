@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  List<num> _initValue = [];
+  List<num>? _initValue = [];
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +36,15 @@ class MyAppState extends State<MyApp> {
               initValue: _initValue,
               autoOpenKeyboard: false,
               hintText: 'search...',
-              selectCallback: (List selectedValue) {
-                print(selectedValue.length);
+              selectCallback: (List? selectedValue) {
+                print(selectedValue!.length);
               },
             ),
             MaterialButton(
               child: Text('change data'),
               onPressed: () {
                 this.setState(() {
-                  if (this._initValue != null && this._initValue.length > 0) {
+                  if (this._initValue!.length > 0) {
                     this._initValue = null;
                   } else {
                     this._initValue = [1, 2, 3];

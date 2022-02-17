@@ -26,15 +26,15 @@ class MultipleSelect {
 
 class MultipleSelectRoute<T> extends PopupRoute<T> {
   final String? barrierLabel;
-  final List<MultipleSelectItem> elements;
-  final List values;
+  final List<MultipleSelectItem>? elements;
+  final List? values;
   final String? title;
 
   MultipleSelectRoute({
     this.barrierLabel,
-    required this.elements,
-    required this.values,
-    required this.title,
+    this.elements,
+    this.values,
+    this.title,
   });
 
   @override
@@ -56,22 +56,18 @@ class MultipleSelectRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = new MediaQuery.removePadding(
       removeTop: true,
       context: context,
       child: SelectorList(
-        elements: this.elements,
-        values: this.values,
+        elements: this.elements!,
+        values: this.values!,
         title: this.title,
       ),
     );
     ThemeData theme = Theme.of(context);
-    if (theme != null) {
-      bottomSheet = new Theme(data: theme, child: bottomSheet);
-    }
-    return bottomSheet;
+    return new Theme(data: theme, child: bottomSheet);
   }
 }
 
@@ -126,8 +122,7 @@ class SelectorListState extends State<SelectorList> {
               Divider(),
               Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (BuildContext context, int index) =>
-                      Divider(height: 1.0, color: Colors.black54),
+                  separatorBuilder: (BuildContext context, int index) => Divider(height: 1.0, color: Colors.black54),
                   itemCount: this._elements.length,
                   itemBuilder: (context, index) {
                     MultipleSelectItem item = this._elements[index];
@@ -180,8 +175,7 @@ class SelectorListState extends State<SelectorList> {
           ),
           decoration: BoxDecoration(
               color: Colors.grey[200],
-              borderRadius:
-                  BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               boxShadow: [
                 BoxShadow(color: Colors.black54, blurRadius: 5.0),
               ]),

@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:multiple_select/multiple_select.dart';
 
 class MultipleSelectBak extends StatefulWidget {
-  MultipleSelectBak({Key key, this.title}) : super(key: key);
+  MultipleSelectBak({required Key key, required this.title}) : super(key: key);
   final String title;
 
   @override
   _MultipleSelectState createState() => _MultipleSelectState();
 }
 
-class _MultipleSelectState extends State<MultipleSelectBak>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+class _MultipleSelectState extends State<MultipleSelectBak> with SingleTickerProviderStateMixin {
+  AnimationController? _controller;
+  Animation<double>? _animation;
 
   bool _folded = true;
   double _unfoldedHeight = 700;
@@ -20,13 +19,11 @@ class _MultipleSelectState extends State<MultipleSelectBak>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 120));
-    _animation =
-        Tween(begin: 0.0, end: this._unfoldedHeight).animate(_controller)
-          ..addListener(() {
-            setState(() {});
-          });
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 120));
+    _animation = Tween(begin: 0.0, end: this._unfoldedHeight).animate(_controller!)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   @override
@@ -46,8 +43,8 @@ class _MultipleSelectState extends State<MultipleSelectBak>
                       this._folded = !this._folded;
                     });
                     this._folded
-                        ? this._controller.reverse(from: this._animation.value)
-                        : this._controller.forward(from: this._animation.value);
+                        ? this._controller!.reverse(from: this._animation!.value)
+                        : this._controller!.forward(from: this._animation!.value);
                   },
                   color: Colors.amber,
                   child: Icon(Icons.child_friendly),
@@ -56,9 +53,7 @@ class _MultipleSelectState extends State<MultipleSelectBak>
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MultipleSelectRoute(
-                          barrierLabel: MaterialLocalizations.of(context)
-                              .modalBarrierDismissLabel),
+                      MultipleSelectRoute(barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel),
                     );
                   },
                   color: Colors.deepOrange,
@@ -69,7 +64,7 @@ class _MultipleSelectState extends State<MultipleSelectBak>
             Positioned(
               child: Text('hello'),
               bottom: 0,
-              top: MediaQuery.of(context).size.height - this._animation.value,
+              top: MediaQuery.of(context).size.height - this._animation!.value,
               width: MediaQuery.of(context).size.width,
             ),
           ],
